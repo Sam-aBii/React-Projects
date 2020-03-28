@@ -1,19 +1,41 @@
-import {createStore} from "redux"
+import { createStore, combineReducers } from "redux"
 
 
 function Todo(state = {
+  name: "Abid"
+}, action) {
+switch (action.type) {
+  case "ADD_TODO":
+    return {
+      ...state,
+      text: "TODO_ADDED"
+    };
+  case "DELETE_TODO":
+    return {
+      ...state,
+      text: "TODO_DELETED"
+    };
+  default:
+      return {
+          ...state
+      }
+}
+}
+
+
+function User(state = {
     name: "Abid"
 }, action) {
   switch (action.type) {
-    case "ADD_TODO":
+    case "ADD_USER":
       return {
         ...state,
-        text: "TODO_ADDED"
+        user: "USER_ADDED"
       };
-    case "DELETE_TODO":
+    case "DELETE_USER":
       return {
         ...state,
-        text: "TODO_DELETED"
+        user: "USER_DELETED"
       };
     default:
         return {
@@ -22,13 +44,19 @@ function Todo(state = {
   }
 }
 
-const Store = createStore(Todo,{})
+
+const rootReducer = combineReducers({
+  Todo,
+  User
+})
+const Store = createStore(rootReducer,{}) 
 
 Store.dispatch({
   type: "ADD_TODO"
-}) 
+})
 
 console.log(Store.getState());
+
 
 
 export default Store;
