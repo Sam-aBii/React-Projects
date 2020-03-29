@@ -49,14 +49,12 @@ const rootReducer = combineReducers({
   Todo,
   User
 })
+
 const Store = createStore(rootReducer,{}) 
 
 Store.dispatch({
   type: "ADD_TODO"
 })
-
-console.log(Store.getState());
-
 
 
 export default Store;
